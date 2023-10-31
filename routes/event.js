@@ -4,6 +4,7 @@ const Event=require("../models/events")
 const User=require("../models/user")
 const router=express.Router()
 
+
 //creating event
 router.post("/createEvent",requireLogin,(req,res)=>{
     const {eventname,venue,date,time,organiser,description}=req.body

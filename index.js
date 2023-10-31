@@ -4,6 +4,7 @@ const { MONGOURI } = require('./keys')
 const cors=require('cors')
 
 
+
 const app=express()
 app.use(express.json())
 const connectToDatabase = async () => {
@@ -17,7 +18,8 @@ const connectToDatabase = async () => {
   
   // Call the async function to connect to the database
   connectToDatabase();
-  
+  app.use(cors())
+
   app.use(require('./routes/auth'))
   
   app.use(require('./routes/event'))

@@ -14,7 +14,11 @@ const userSchema=new mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    invitations:[{
+        postedBy:{type:ObjectId,ref:'User'}
+
+    }]
     
 })
 
