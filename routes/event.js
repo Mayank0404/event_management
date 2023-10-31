@@ -42,6 +42,46 @@ router.get("/alluser",requireLogin,(req,res)=>{
        
 })
 
+//inviting guest
+// router.put('/invite', requireLogin, (req, res) => {
+//   const {eid}=req.body
+//     User.findByIdAndUpdate(
+//       req.user._id,
+//       { $push: {invitations:eid} },
+//       { new: true },
+//       (err, targetUser) => {
+//         if (err) {
+//           return res.status(422).json({ error: err });
+//         } else{
+//           return res.status(422).json({ targetUser });
+
+//         }
+        
+//       }
+//     );
+//   });
+router.put('/invite:eid', requireLogin, async (req, res) => {
+  try {
+    const { eid } = req.params.eid;
+
+    const targetUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { $push: { invitations: eid } },
+      { new: true }
+    );
+
+    if (!targetUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    return res.status(200).json({ targetUser });
+  } catch (err) {
+    console.error('Error:', err);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+
 
 
   

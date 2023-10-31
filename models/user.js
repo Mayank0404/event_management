@@ -16,6 +16,7 @@ const userSchema=new mongoose.Schema({
         required:true
     },
     invitations:[{
+        type:String,
         postedBy:{type:ObjectId,ref:'User'}
 
     }]
