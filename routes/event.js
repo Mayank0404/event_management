@@ -102,11 +102,11 @@ router.put('/invite/:uid/:eid', requireLogin, async (req, res) => {
 router.put('/reply/:eid', requireLogin, async (req, res) => {
   try {
     const eventId = req.params.eid;
-    const replyText = req.body; // Replace with the actual reply text
+    const replyText = req.body.replyText.toString(); // Replace with the actual reply text
 
     const updatedEvent = await Event.findByIdAndUpdate(
       eventId,
-      { $set: { [`rsvp.${eventId}`]: replyText } },
+      { $set: { [`rsvp.${req.user._id}`]: replyText } },
       { new: true }
     );
 
