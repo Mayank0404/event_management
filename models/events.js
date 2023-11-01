@@ -26,11 +26,10 @@ const eventSchema=new mongoose.Schema({
         type:ObjectId,
         ref:'User'
     },
-    guestList:[{
-        text:String,
-        postedBy:{type:ObjectId,ref:'User'}
-
-    }]
+    rsvp: {
+        type: Map,
+        of: String  // The value is a string representing the reply text
+    }
     
 })
 

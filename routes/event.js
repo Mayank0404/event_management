@@ -81,6 +81,46 @@ router.put('/invite/:uid/:eid', requireLogin, async (req, res) => {
   }
 });
 
+//reply
+// router.put('/reply/:eid', requireLogin, (req, res) => {
+    
+//       Event.findByIdAndUpdate(
+//         req.params.eid,
+//         { $set: { [`rsvp.${req.params.eid}`]: 'Your Reply Text' } },
+//         { new: true },
+//         (err, targetUser) => {
+//           if (err) {
+//             return res.status(422).json({ error: err });
+//           } else{
+//             return res.status(422).json({ targetUser });
+  
+//           }
+          
+//         }
+//       );
+//     });
+router.put('/reply/:eid', requireLogin, async (req, res) => {
+  try {
+    const eventId = req.params.eid;
+    const replyText = req.body; // Replace with the actual reply text
+
+    const updatedEvent = await Event.findByIdAndUpdate(
+      eventId,
+      { $set: { [`rsvp.${eventId}`]: replyText } },
+      { new: true }
+    );
+
+    if (!updatedEvent) {
+      return res.status(422).json({ error: 'Event not found' });
+    }
+
+    return res.status(200).json({ updatedEvent });
+  } catch (err) {
+    console.error('Error:', err);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 
 
 
