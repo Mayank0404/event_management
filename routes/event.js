@@ -60,13 +60,13 @@ router.get("/alluser",requireLogin,(req,res)=>{
 //       }
 //     );
 //   });
-router.put('/invite:eid', requireLogin, async (req, res) => {
+router.put('/invite/:id', requireLogin, async (req, res) => {
   try {
-    const { eid } = req.params.eid;
+    ;
 
     const targetUser = await User.findByIdAndUpdate(
       req.user._id,
-      { $push: { invitations: eid } },
+      { $push: { invitations:req.params.id} },
       { new: true }
     );
 

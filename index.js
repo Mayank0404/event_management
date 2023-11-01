@@ -23,6 +23,7 @@ const connectToDatabase = async () => {
   app.use(require('./routes/auth'))
   
   app.use(require('./routes/event'))
+  app.use(require('./routes/user'))
 
 
 const PORT=4000
