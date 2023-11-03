@@ -121,6 +121,26 @@ router.put('/reply/:eid', requireLogin, async (req, res) => {
   }
 });
 
+//showing replies
+// router.get('/eventreply/:eid',requireLogin,(req,res)=>{
+//   Event.findOne({_id:req.params.eid})
+//       .then(event=>{
+//           if(event){
+//             const rsvp=event.rsvp
+//               return res.status(422).json({event})
+//           }
+//           })
+//       })
+
+
+      router.get("/eventreply/:eid",requireLogin,(req,res)=>{
+        Event.findOne({_id:req.params.eid})
+        // .populate("organ"," _id name")
+        .then(event =>{
+            res.json(event)
+        })
+      })
+
 
 
 

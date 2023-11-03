@@ -74,6 +74,8 @@ router.get('/user/:id',requireLogin,(req,res)=>{
                     return res.status(500).json({ error: err.message });
                 });
         });
-           
+      
+        
+       
 
 module.exports=router
